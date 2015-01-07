@@ -1,0 +1,65 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:		sync-svn
+# Required-Start:	$all
+# Required-Stop:
+# Default-Start:	2 3 4 5
+# Default-Stop:         0 1 6	
+# Short-Description:	sync-svn
+### END INIT INFO
+#
+#
+# *  srv-sync-svn.sh - A Bash Implementation
+# *  srv-sync-svn.sh
+# *  Copyright (C) 2014  linuxknow@gmail.com
+# *  This program is free software; you can redistribute it and/or modify
+# *  it under the terms of the GNU General Public License as published by
+# *  the Free Software Foundation; either version 2 of the License, or
+# *  (at your option) any later version.
+# *
+# *  This program is distributed in the hope that it will be useful,
+# *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+# *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# *  GNU General Public License for more details.
+# *
+# *  You should have received a copy of the GNU General Public License along
+# *  with this program; if not, write to the Free Software Foundation, Inc.,
+# */
+#
+
+set -e
+
+. /lib/lsb/init-functions
+
+export PATH="${PATH:+$PATH:}/usr/sbin:/sbin"
+
+SVN_SRV=/home/www/desarrollo/srv_svn
+PID_DAEMON=/home/www/desarrollo/daemon.pid
+NAME_SYNC=sync-svn.sh
+PATH_SYNC=/home/soporte/proyecto-c/control-servicio-svn/$NAME_SYNC
+USUARIO=www-data
+
+case "$1" in
+  start)
+       $SVN_SRV start -d $PID_DAEMON  -u $USUARIO $PATH_SYNC
+	     log_daemon_msg "Starting sync-svn" "sync-svn"
+	;;
+  stop)
+       $SVN_SRV stop -d $PID_DAEMON
+	     log_daemon_msg "Stopping sync-svn" "sync-svn"
+       rm -f $PID_DAEMON
+	;;
+  status)
+        if [ -e $PID_DAEMON];then
+          echo "Procesos:"
+          echo $PID_DAEMON
+        fi
+	;;
+  *)
+	log_action_msg "Usage: /etc/init.d/sync-svn {start|stop|status}"
+	exit 1
+	;;
+esac
+
+exit 0
