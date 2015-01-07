@@ -55,4 +55,8 @@ password=www-data
 y como root ejecutamos:
 /etc/init.d/srv-sync-svn start
 
+Permite funcionalidad con git tambien editando el script sync-svn.sh, es decir podemos tener multiples clientes git push y multiples proyectos bajo diferentes folders y una actualziación cambia la vista en el servidor idem para svn.
+
+La motivación es la sync en tiempo real de un cambio en un determinado servidor para pruebas en gral, desarrollo o producción.
+
 Para ejecutar el servicio.
