@@ -2,7 +2,6 @@
 Mirror-svn mantiene la relación entre las actualizaciones de svn de algún/os proyecto/s respecto de la web de desarrollo.
 
 
-El servicio de srv_svn mantiene la relación entre las actualizaciones del svn de algún/os proyecto/s respecto de la web de desarrollo.
 
 Una actualización desde cualquier punto terminal en la base de desarrollo acciona un evento de actualización.
 
